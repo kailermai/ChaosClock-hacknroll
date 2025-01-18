@@ -11,6 +11,14 @@ body {
   background-color: #fff;
 }
 
+#hour,
+#min,
+#sec {
+  height: 100%;
+  width: 100%;
+  font-size: 40px;
+}
+
 .cursor {
   position: absolute;
   z-index: 100;
