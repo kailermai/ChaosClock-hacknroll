@@ -19,18 +19,25 @@
       <div class="d-flex justify-content-center">
         <h1 class="center">Chaos Clock</h1>
       </div>
-      <div class="row h-25 mt-4">
-        <div class="col d-flex align-items-center justify-content-center">
-          <input type="number" id="hour" min="0" max="60" step="1" />
+      <div class="center-box">
+        <canvas id="c"></canvas>
+      </div>
+
+      <div class="countdown row">
+        <div class="col">
+          <p>MINUTES</p>
+          <div class="data" id="countdown-minutes">0</div>
         </div>
-        <div class="col d-flex align-items-center justify-content-center">
-          <input type="number" id="min" min="0" max="60 " step="1" />
-        </div>
-        <div class="col d-flex align-items-center justify-content-center">
-          <input type="number" id="sec" min="0" max="60" step="1" />
+        <div class="col">
+          <p>SECONDS</p>
+          <div class="data" id="countdown-seconds">0</div>
         </div>
       </div>
-      <a href="snooze.html"><button>invert</button></a>
+
+      <!-- Buttons to start and reset alarm -->
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button id="start">Start</button>
+      </div>
     </div>
 
     <!-- <div class="cursor"></div>
@@ -42,5 +49,6 @@
       <img src="images/fanpic.png" class="fan" />
     </div>
     <script src="./main.js"></script> -->
+    <script src="./render.js"></script>
   </body>
 </html>

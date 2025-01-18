@@ -33,6 +33,6 @@
   // Event listener for mouse movement
   document.addEventListener("mousemove", updateCursorPosition);
 
-  // Hide the default cursor
-  document.body.style.cursor = "none";
+  // Apply 'cursor: none' to hide the default cursor
+  document.documentElement.style.cursor = "none";
 })();
