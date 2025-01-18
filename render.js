@@ -1,3 +1,9 @@
+let realTime = 0;
+let remainingTime = 0;
+let imTime = 0;
+let interval = null;
+const timerEnd = document.getElementById("alert");
+
 // Define constants and utility functions
 var display = document.getElementById("c"),
   context = display.getContext("2d"),
@@ -199,7 +205,7 @@ class DragHandler {
   handleMouseMove(event) {
     const { x, y } = this.getMousePos(event);
 
-    console.log(`Mouse position: ${x}, ${y}`); // Debugging logs for mouse position
+    // console.log(`Mouse position: ${x}, ${y}`); // Debugging logs for mouse position
 
     if (this.isDragging) {
       display.style.cursor = "grabbing";
@@ -284,16 +290,89 @@ const dragHandler = new DragHandler();
   ball.update();
   ball.render();
 
+  realTime = ~~mapValue(ball.position.x, 20, 80, 60);
+  imTime = ~~(100 - ball.position.y - 30);
+
   context.font = "20px Arial";
   context.textBaseline = "middle";
   context.textAlign = "center";
   context.fillText(
-    ~~mapValue(ball.position.x, 20, 80, 100) +
-      (~~(100 - ball.position.y - 30)
-        ? " + " + ~~(100 - ball.position.y - 30) + "i "
-        : "") +
-      " min ",
+    realTime + (imTime ? " + " + imTime + "i " : "") + "min",
     centerX,
     centerY
   );
 })();
+
+// Functions for displaying countdown and start button
+window.onload = () => {
+  document.querySelector("#start").onclick = calculate;
+  document.querySelector("#reset").onclick = reset;
+  document.querySelector("#stop").onclick = pauseTimer;
+};
+
+function calculate() {
+  if (imTime != 0) {
+    timerEnd.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+    window.alert("Put the ball back!");
+  }
+  if (remainingTime === 0) {
+    remainingTime = realTime * 60; // Convert minutes to seconds
+  }
+  const endTime = new Date(new Date().getTime() + remainingTime * 1000);
+  interval = setInterval(() => calculateTime(endTime), 1000);
+}
+
+function pauseTimer() {
+  if (interval) {
+    clearInterval(interval); // Stop the timer
+    interval = null;
+
+    // Calculate remaining time
+    const currentTime = new Date();
+    const endTime = new Date(new Date().getTime() + remainingTime * 1000);
+    remainingTime = Math.max((endTime - currentTime) / 1000, 0);
+  }
+}
+
+function calculateTime(endTime) {
+  const currentTime = new Date();
+  const minutes = document.querySelector("#countdown-min");
+  const seconds = document.querySelector("#countdown-sec");
+
+  // if endtime is greater than currenttime then update countdown else stop it
+  if (endTime > currentTime) {
+    const timeLeft = (endTime - currentTime) / 1000;
+    remainingTime = timeLeft;
+    minutes.innerText = Math.floor((remainingTime / 60) % 60);
+    seconds.innerText = Math.floor(remainingTime % 60);
+    if (seconds.innerText % 10 == 0) {
+      timerEnd.play().catch((error) => {
+        console.error("Error playing audio:", error);
+      });
+      window.alert(
+        "You have " +
+          minutes.innerText +
+          "minutes and " +
+          seconds.innerText +
+          " seconds left."
+      );
+    }
+
+    if (seconds.innerText == 15) {
+      window.location.replace("snooze.html");
+    }
+  } else {
+    minutes.innerText = 0;
+    seconds.innerText = 0;
+    clearInterval(interval);
+  }
+}
+
+function reset() {
+  document.querySelector("#countdown-min").innerText = 0;
+  document.querySelector("#countdown-sec").innerText = 0;
+  remainingTime = 0;
+  clearInterval(interval);
+}

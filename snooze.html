@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inverted Cursor</title>
+    <link rel="stylesheet" href="./darkness-invert.css" />
   </head>
   <body>
-    <h1>Move your cursor to see the inverted effect!</h1>
-    <!-- Updated script tag without SRI -->
+    <h1>
+      You just stumbled upon the darkness, find the snooze button hidden
+      somewhere in the deep dark to stop the alarm !!
+    </h1>
+    <div class="darkness" id="darkness">
+      <div class="light" id="light">
+        <div class="shadow"></div>
+      </div>
+    </div>
+    <!-- Snooze Button -->
+    <button class="snooze-button" onclick="stopAlarm()">Snooze</button>
+    <script>
+      function stopAlarm() {
+        window.location.replace("index-fan.html");
+      }
+    </script>
+    <audio preload="auto" autoplay loop>
+      <source
+      src=https://audio-previews.elements.envatousercontent.com/files/173153038/preview.mp3
+      />
+    </audio>
     <script src="js/invert.js"></script>
   </body>
 </html>

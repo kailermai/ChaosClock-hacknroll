@@ -15,7 +15,13 @@
     ></script>
   </head>
   <body>
-    <div class="container mt-4">
+    <audio
+      id="alert"
+      src=https://audio-previews.elements.envatousercontent.com/files/431862105/preview.mp3
+      preload="auto"
+      type="audio/mpeg"
+    ></audio>
+    <div class="container mt-5">
       <div class="d-flex justify-content-center">
         <h1 class="center">Chaos Clock</h1>
       </div>
@@ -23,32 +29,27 @@
         <canvas id="c"></canvas>
       </div>
 
-      <div class="countdown row">
-        <div class="col">
-          <p>MINUTES</p>
-          <div class="data" id="countdown-minutes">0</div>
-        </div>
-        <div class="col">
-          <p>SECONDS</p>
-          <div class="data" id="countdown-seconds">0</div>
+      <div class="countdown row mt-4">
+        <div class="col d-flex justify-content-center">
+          <div class="d-flex flex-row">
+            <div class="d-flex flex-row">
+              <div class="data" id="countdown-min"><strong>0</strong></div>
+              <div class="ms-2" ><strong>MINUTES</strong></div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="data ms-3" id="countdown-sec"><strong>0</strong></div>
+              <div class="ms-2"><strong>SECONDS</strong></div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- Buttons to start and reset alarm -->
+      
       <div class="d-flex align-items-center justify-content-center mt-4">
-        <button id="start">Start</button>
+        <button class="button" id="start">Start</button>
+        <button class="button" id="stop">Stop</button>
+        <button class="button" id="reset">Reset</button>
       </div>
     </div>
-
-    <!-- <div class="cursor"></div>
-    <div class="pointer_lock_banner">Click here to lock the cursor</div>
-    <div class="fan_block">
-      <div class="wind">
-        <button class="unsubscribe_btn">Unsubscribe</button>
-      </div>
-      <img src="images/fanpic.png" class="fan" />
-    </div>
-    <script src="./main.js"></script> -->
     <script src="./render.js"></script>
   </body>
 </html>

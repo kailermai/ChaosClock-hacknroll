@@ -100,3 +100,14 @@ document.addEventListener("pointerlockchange", () => {
     isCursorLocked = true;
   }
 });
+
+// Select the snooze button and the audio element
+const snoozeButton = document.querySelector(".snooze_btn");
+const alarmAudio = document.querySelector("audio");
+
+// Add an event listener to the snooze button
+snoozeButton.addEventListener("click", () => {
+  alarmAudio.pause(); // Pause the audio
+  alarmAudio.currentTime = 0; // Reset the audio to the start
+  snoozeButton.textContent = "Alarm Stopped"; // Optional: Update button text
+});
